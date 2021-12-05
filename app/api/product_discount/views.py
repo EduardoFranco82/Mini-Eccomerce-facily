@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from .schemas import ShowProductDiscountSchema, ProductDiscountSchema
-from fastapi.params import Depends
+from fastapi.param_functions import Depends
 from typing import List
 from fastapi import APIRouter, status
 from app.repositories.product_discount_repository import PaymentDiscountRepository

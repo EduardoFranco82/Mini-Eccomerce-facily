@@ -1,8 +1,7 @@
 from typing import List
 from fastapi import APIRouter, status
-from fastapi.params import Depends
+from fastapi.param_functions import Depends
 from .schemas import ProductSchema, ShowProductSchema
-
 from app.models.models import Product
 from app.repositories.product_repository import ProductRepository
 

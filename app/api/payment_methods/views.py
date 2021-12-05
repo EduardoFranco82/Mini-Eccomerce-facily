@@ -3,7 +3,7 @@ from fastapi import APIRouter, status
 from sqlalchemy.orm import Session
 from app.models.models import PaymentMethod, Product
 from .schemas import PaymentMethodsSchema, ShowPaymentMethodsSchema
-from fastapi.params import Depends
+from fastapi.param_functions import Depends
 from app.repositories.payment_method_repository import PaymentMethodRepository
 
 

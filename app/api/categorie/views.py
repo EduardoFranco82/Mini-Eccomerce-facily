@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, status
 from .schemas import CategorieSchema, ShowCategorieSchema
 
-from fastapi.params import Depends
+from fastapi.param_functions import Depends
 
 from app.models.models import Categorie
 from app.repositories.categorie_repository import CategorieRepository

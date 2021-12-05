@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import APIRouter, status
-from fastapi.params import Depends
+from fastapi.param_functions import Depends
 from app.models.models import Supplier
 from .schemas import ShowSuppliersSchema, SuppliersSchema
 from app.db.db import get_db

@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, status
 from fastapi.applications import FastAPI
-from fastapi.params import Depends
+from fastapi.param_functions import Depends
 from app.models.models import Coupons
 from app.repositories.coupons_repository import CouponsRepository
 from .schemas import CouponsSchema, ShowCouponsSchema
