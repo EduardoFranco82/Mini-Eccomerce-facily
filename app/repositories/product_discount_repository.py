@@ -1,11 +1,16 @@
+from app.api.catalog.schemas import CatalogFilter
 from .base_repository import BaseRepository
 from sqlalchemy.orm import Session
 from fastapi import Depends
 from app.db.db import get_db
-from app.models.models import PaymentMethod
+from app.models.models import Product, ProductDiscount
 
 
 
-class PaymentDiscountRepository(BaseRepository):
+
+class ProductDiscountRepository(BaseRepository):
     def __init__(self, session: Session = Depends(get_db)):
-        super().__init__(session, PaymentMethod)
+        super().__init__(session, ProductDiscount)
+
+    
+    

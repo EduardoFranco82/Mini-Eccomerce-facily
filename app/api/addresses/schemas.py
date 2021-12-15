@@ -9,11 +9,11 @@ class AdressesSchema(BaseModel):
     zipcode: str
     neighbourhood: str
     primary: bool
-    coustomer_id: int
+    customer_id: int
 
 class ShowAdressesSchema(AdressesSchema):
     id: int
-    coustomer: ShowCustomersSchema
+    customer: ShowCustomersSchema
 
     class Config:
         orm_mode = True

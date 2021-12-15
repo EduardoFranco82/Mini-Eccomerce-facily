@@ -7,3 +7,11 @@ from app.models.models import Addresses
 class AddressesRepository (BaseRepository):
     def __init__(self, session: Session = Depends(get_db)):
         super().__init__(session, Addresses)
+
+
+    def is_primary(self, customer_id, primary):
+        return (
+            self.session.query(self.model)
+            .filter_by(customer_id=customer_id, primary=primary)
+            .first()
+        )

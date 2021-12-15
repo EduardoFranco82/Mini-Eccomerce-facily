@@ -1,18 +1,24 @@
 from pydantic import BaseModel
-from sqlalchemy.sql.sqltypes import DateTime
+from datetime import datetime
+from enum import Enum
 
 
-
+class CouponsType(str, Enum):
+    VALUE = 'value'
+    PERCENTAGE = 'percentage'
 
 
 class CouponsSchema(BaseModel):
     code: str
-    expire_at : DateTime
+    expire_at : datetime
     limit : int
-    type :str
+    type : CouponsType
     value : float
 
 
+class UpdateCuponsSchema(BaseModel):
+    limit: int
+    expire_at: datetime
 
 
 class ShowCouponsSchema(CouponsSchema):
