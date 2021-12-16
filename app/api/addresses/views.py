@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.post('/', status_code= status.HTTP_201_CREATED)
 def create(address: AdressesSchema, service: AddressService = Depends()):
-    service.create_address(address)
+   return service.create_address(address)
 
 
 @router.get('/', response_model=List[ShowAdressesSchema])
@@ -19,7 +19,7 @@ def index(repository:AddressesRepository = Depends ()):
 
 @router.put('/{id}')
 def update(id:int, address: AdressesSchema, service: AddressService = Depends ()):
-    service.update_addres(id, address)
+   return service.update_addres(id, address)
 
 @router.get('/{id}', response_model= ShowAdressesSchema)
 def show(id:int, repository: AddressesRepository = Depends()):

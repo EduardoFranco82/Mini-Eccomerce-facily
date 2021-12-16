@@ -20,7 +20,7 @@ router = APIRouter(dependencies=[Depends(only_admin)])
 def create(product_discount: ProductDiscountSchema, 
               service: ProductDiscountService = Depends()):
     try:
-        service.create_discount(product_discount)
+     return   service.create_discount(product_discount)
     except PaymentMethodDiscountAlreadyExistsException as payment_method:
         raise HTTPException (status_code=status.HTTP_400_BAD_REQUEST, detail= payment_method.message)
     except PaymentMethodsNotAvailableException as payment_method_not_available:
@@ -34,7 +34,7 @@ def index(repository: ProductDiscountRepository = Depends()):
 @router.put('/{id}')
 def update(id: int, product_discount: ProductDiscountSchema,
         repository: ProductDiscountRepository = Depends()):
-    repository.update(id, product_discount.dict())
+   return repository.update(id, product_discount.dict())
 
 @router.get('/{id}', response_model=ShowProductDiscountSchema)
 def show(id: int, repository: ProductDiscountRepository = Depends()):

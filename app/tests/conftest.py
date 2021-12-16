@@ -1,8 +1,9 @@
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.sql.sqltypes import Date
 from app.db.db import get_db
-from app.models.models import Base, Categorie, Supplier, User
+from app.models.models import Base, Categorie, Customers, PaymentMethod, Product, Supplier, User
 from app.app import app
 import pytest
 import factory
@@ -48,6 +49,22 @@ def user_factory(db_session):
 
     return UserFactory
 
+@pytest.fixture()
+def product_factory(db_session, category_factory, supplier_factory):#passar parametros
+    class ProductFactory(factory.alchemy.SQLAlchemyModelFactory):
+        class Meta:
+            model = Product
+            sqlalchemy_session = db_session
+
+        id = factory.Faker('pyint') # se atentar aos tipos
+        description = factory.Faker('word')
+        price = factory.Faker('pyfloat')
+        technical_details = factory.Faker('word')
+        image = factory.Faker ('word')
+        visible = factory.Faker ('pybool')
+        categorie = factory.SubFactory(category_factory)
+        supplier = factory.SubFactory(supplier_factory)
+    return ProductFactory
 
 @pytest.fixture()
 def category_factory(db_session):
@@ -73,6 +90,51 @@ def supplier_factory(db_session):
         name = factory.Faker('name')
 
     return SupplierFactory
+
+@pytest.fixture()
+def payment_methods_factory(db_session):
+    class Payment_MethodsFactory(factory.alchemy.SQLAlchemyModelFactory):
+        class Meta:
+            model = PaymentMethod
+            sqlalchemy_session = db_session
+
+        id = factory.Faker('pyint')
+        name = factory.Faker('name')
+        enabled = factory.Faker('pybool')
+
+    return Payment_MethodsFactory
+
+
+@pytest.fixture()
+def customers_factory(db_session):#passar parametros
+    class CustomersFactory(factory.alchemy.SQLAlchemyModelFactory):
+        class Meta:
+            model = Customers
+            sqlalchemy_session = db_session
+
+        id = factory.Sequence(int) # se atentar aos tipos
+        first_name = factory.Faker('name')
+        last_name = factory.Faker('name')
+        phone_number = factory.Faker('word')
+        genre = factory.Faker ('word')
+        document_id = factory.Faker ('word')
+        birth_date = factory.Faker('date_of_birth')
+        user_id = factory.Faker('pyint')
+    return CustomersFactory
+
+@pytest.fixture()
+def user_factory(db_session):
+    class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
+        class Meta:
+            model = User
+            sqlalchemy_session = db_session
+
+        id = factory.Faker('pyint')
+        display_name = factory.Faker('name')
+        email = factory.Faker('word')
+        role = factory.Faker('word')
+        password = factory.Faker('word')
+    return UserFactory
 
 
 @pytest.fixture()

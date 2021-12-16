@@ -17,4 +17,4 @@ class CreateCouponsService:
         if find_unique_coupon:
             raise CouponCodeAlreadyExistsException
 
-        self.coupons_repository.create(Coupons(**coupon.dict()))
+        return self.coupons_repository.create(Coupons(**coupon.dict()))

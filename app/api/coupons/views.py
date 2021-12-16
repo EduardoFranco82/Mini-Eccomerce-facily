@@ -15,7 +15,7 @@ router = APIRouter(dependencies=[Depends(only_admin)])
 @router.post('/', status_code= status.HTTP_201_CREATED)
 def create(coupon: CouponsSchema, service: CreateCouponsService = Depends()):
     try: 
-        service.unique_coupon(coupon)
+      return  service.unique_coupon(coupon)
         
     except CouponCodeAlreadyExistsException as exists_coupon:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail= exists_coupon.message)
@@ -28,7 +28,7 @@ def index(repository: CouponsRepository = Depends()):
 
 @router.put('/{id}')
 def update(id: int, coupon:UpdateCuponsSchema, repository:CouponsRepository = Depends()):
-    repository.update(id, coupon.dict())
+  return  repository.update(id, coupon.dict())
 
 @router.get('/{id}', response_model=ShowCouponsSchema)
 def show(id: int, repository: CouponsRepository = Depends()):

@@ -15,7 +15,7 @@ router = APIRouter(dependencies=[Depends(only_admin)])
 @router.post('/', status_code=status.HTTP_201_CREATED)
 def create(payment_method: PaymentMethodsSchema, 
           repository: PaymentMethodRepository = Depends()):
-    repository.create(PaymentMethod(**payment_method.dict()))
+   return repository.create(PaymentMethod(**payment_method.dict()))
 
 
 @router.get('/', response_model=List[ShowPaymentMethodsSchema])
@@ -26,7 +26,7 @@ def index(repository: PaymentMethodRepository = Depends()):
 @router.put('/{id}')
 def update(id: int, payment_method: PaymentMethodsSchema, 
            repository: PaymentMethodRepository = Depends()):
-    repository.update(id, payment_method.dict())
+  return  repository.update(id, payment_method.dict())
 
 
 @router.get('/{id}', response_model=ShowPaymentMethodsSchema)

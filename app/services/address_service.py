@@ -21,8 +21,8 @@ class AddressService:
 
     def create_address(self, address: AdressesSchema):
         self.switch_to_false_address(address)
-        self.address_repository.create(Addresses(**address.dict()))
+        return self.address_repository.create(Addresses(**address.dict()))
         
     def update_addres(self, id, address: AdressesSchema):
         self.switch_to_false_address(address)
-        self.address_repository.update(id, address.dict())
+        return self.address_repository.update(id, address.dict())

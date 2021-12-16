@@ -14,7 +14,7 @@ router = APIRouter()
 @router.post('/',status_code=status.HTTP_201_CREATED)
 def create(customer: CustomerSchema, service: CustomerService = Depends()):
     try:
-        service.create_customer(customer)
+     return   service.create_customer(customer)
     
     except Admin_userAlreadyExistsEmailException as msg:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail= msg.message)
@@ -24,8 +24,8 @@ def index(repository: CustomersRepository = Depends()):
     return repository.get_all()
 
 @router.put('/{id}')
-def update(id:int , customer: UpdateCustomersSchema, repository: CustomersRepository = Depends()):
-    repository.update(id, customer.dict())
+def update(id:int , customer: UpdateCustomersSchema, service: CustomerService = Depends()):
+  return  service.update_customer(customer,id)
 
 @router.get('/{id}', response_model= ShowCustomersSchema)
 def show(id:int, repository: CustomersRepository = Depends()):
